@@ -24,10 +24,12 @@ class ImageFilesController < ApplicationController
   def upload
     raise ArgumentError, 'invalid params' if params[:image].blank?
 
-    imageFile = ImageFile.create(image: params[:image])
+    movie = FFMPEG::Movie.new(params[:image].tempfile.path)
+    tempfile_gif = Tempfile.create(['test', '.gif'])
+    output = movie.transcode(tempfile_gif.path, "-t 10")
 
-    # imageFile.title = params[:title]
-    # imageFile.name = params[:name]
+    params[:image].tempfile = tempfile_gif
+    imageFile = ImageFile.create(image: params[:image])
 
     imageFile.save!
 

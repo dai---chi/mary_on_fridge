@@ -3,9 +3,8 @@ h1 Listing image_files
 table
   thead
     tr
-      th Filename
+      th Date
       th Image
-      th Name
       th
       th
       th
@@ -13,10 +12,9 @@ table
   tbody
     - @image_files.each do |image_file|
       tr
-        td = image_file.filename
+        td = image_file.created_at
         td
           img src=image_file.image.url width=200
-        td = image_file.name
         td = link_to 'Show', image_file
         td = link_to 'Edit', edit_image_file_path(image_file)
         td = link_to 'Destroy', image_file, data: {:confirm => 'Are you sure?'}, :method => :delete
