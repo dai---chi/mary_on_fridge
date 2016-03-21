@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Filename:
+  = @image_file.filename
+p
+  strong Image:
+  = @image_file.image
+p
+  strong Name:
+  = @image_file.name
+
+= link_to 'Edit', edit_image_file_path(@image_file)
+'|
+= link_to 'Back', image_files_path
